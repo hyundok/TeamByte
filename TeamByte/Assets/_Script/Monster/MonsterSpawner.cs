@@ -5,9 +5,11 @@ using UnityEngine;
 public class MonsterSpawner : MonoBehaviour
 {
     // Start is called before the first frame update
+    public GameObject m_Monster;
     void Start()
     {
-        
+        GameObject clone = Instantiate(m_Monster);
+        MonsterManager.Instance.MonsterInit(clone.GetComponent<Monster>());
     }
 
     // Update is called once per frame
