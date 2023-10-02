@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MonsterData : MonoBehaviour
+[CreateAssetMenu(fileName = "Monster Data", menuName = "ScriptableObject/Monster Data Asset", order = 2)]
+public class MonsterData : ScriptableObject
 {
     public int m_iAttackDamage;
     public int m_iHP;

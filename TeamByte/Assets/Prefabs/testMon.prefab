@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 950208205029606879}
   - component: {fileID: 2649660778360142351}
   m_Layer: 0
-  m_Name: Circle
+  m_Name: testMon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -97,4 +97,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60f08f7e2b2588648b96d8c6ea91861d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_sData: {fileID: 0}
+  m_sData: {fileID: 11400000, guid: bb387230f8db7924683c6ad5268f1ebb, type: 2}

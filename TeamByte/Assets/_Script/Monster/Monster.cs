@@ -2,8 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditorInternal.ReorderableList;
-using static UnityEngine.GraphicsBuffer;
+
 
 
 public class Monster : MonoBehaviour
@@ -16,23 +15,24 @@ public class Monster : MonoBehaviour
     {
         transform.position = new Vector3(0, 0, 0);
         m_sData = new MonsterData();
-        Debug.Log("Update");
-        StartCoroutine(OnUpdate());
+
     }
     private IEnumerator OnUpdate()
     {
-        Debug.Log(m_cFSM);
+
         while (true)
         {
-            if(!m_cFSM)
+            if (!m_cFSM)
+            {
                 m_cFSM.Update();
-
+            }
             yield return new WaitForSeconds(0.04f);
         }
     }
     public bool SetData(StateData _data)            //제일 초기에 한번 데이터 세팅
     {
         m_cState = _data;
+        Debug.Log(m_cState);
         if (null == m_cFSM)
         {
             m_cFSM = new MonsterFSM(this);
@@ -47,11 +47,8 @@ public class Monster : MonoBehaviour
         }
         gameObject.SetActive(true);
 
+        StartCoroutine(OnUpdate());
         return true;
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        
+
     }
 }
