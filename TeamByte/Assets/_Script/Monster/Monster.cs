@@ -61,4 +61,22 @@ public class Monster : MonoBehaviour
         transform.Translate(direction * moveSpeed * Time.deltaTime);
 
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("OnTriggerEnter");
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("OnTriggerEnter11");
+            m_cFSM.ChangeState(m_cState.AttackState);
+        }
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        Debug.Log("s");
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("s1");
+            m_cFSM.ChangeState(m_cState.AttackState);
+        }
+    }
 }

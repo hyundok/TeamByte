@@ -15,3 +15,4 @@ MonoBehaviour:
   m_iAttackDamage: 1
   m_iHP: 1
   m_iSpeed: 50
+  m_iAttackRange: 0.3
