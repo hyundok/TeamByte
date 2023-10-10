@@ -10,16 +10,17 @@ public class Monster : MonoBehaviour
     [SerializeField] private MonsterData m_sData;
     private MonsterFSM m_cFSM;
     private StateData m_cState;
-
+    [SerializeField] private GameObject m_target;
+    public GameObject _target => m_target;
     void Start()
     {
-        transform.position = new Vector3(0, 0, 0);
-        m_sData = new MonsterData();
-
+        transform.position = new Vector3(10, 10, 0);
+        m_target = GameObject.Find("Player");
+        
+        m_cFSM.ChangeState(m_cState.MoveState);
     }
     private IEnumerator OnUpdate()
     {
-
         while (true)
         {
             if (!m_cFSM)
@@ -49,6 +50,15 @@ public class Monster : MonoBehaviour
 
         StartCoroutine(OnUpdate());
         return true;
+
+    }
+    public void MoveToPlayer()
+    {
+        Vector2 direction = m_target.transform.position - transform.position;
+        direction.Normalize();
+
+        float moveSpeed = m_sData.m_iSpeed; // 이동 속도
+        transform.Translate(direction * moveSpeed * Time.deltaTime);
 
     }
 }
