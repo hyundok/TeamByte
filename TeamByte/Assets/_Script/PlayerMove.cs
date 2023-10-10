@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerMove : MonoBehaviour
 {
     public float speed;
     private float horizontalInput;
@@ -10,12 +10,14 @@ public class PlayerController : MonoBehaviour
 
     Rigidbody2D playerRb;
     Animator animator;
+    SpriteRenderer spriteRenderer;
 
     // Start is called before the first frame update
     void Start()
     {
         playerRb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -29,12 +31,25 @@ public class PlayerController : MonoBehaviour
 
         transform.Translate(moveDistance);
 
-        float playerSpeed = playerMove.magnitude * speed;
-        animator.SetFloat("Speed", playerSpeed);
-
-        if (playerMove == Vector3.zero)
+        if (Input.GetKeyDown(KeyCode.A))
         {
-            animator.SetFloat("Speed", 0f);
+            spriteRenderer.flipX = false;
         }
+        else if (Input.GetKeyDown(KeyCode.D))
+        {
+            spriteRenderer.flipX = true;
+        }
+
+        if (horizontalInput == 0 && verticalInput == 0)
+        {
+            animator.speed = 0f;
+            animator.SetTrigger("PlayerStop");
+        }
+        else
+        {
+            animator.speed = 1f;
+            animator.SetTrigger("PlayerMove");
+        }
+
     }
 }
