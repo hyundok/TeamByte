@@ -7,11 +7,11 @@ public class MonsterAttackState : ScriptableObject, IState
 {
     public void Enter(Monster owner)
     {
-
+        Debug.Log("Attack State Enter");
     }
     public void Excute(Monster owner)
     {
-        
+        Debug.Log("Attack State Execute");
     }
     public void Exit(Monster owner)
     {
