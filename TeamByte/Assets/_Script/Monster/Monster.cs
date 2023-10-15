@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 
 
@@ -12,12 +13,16 @@ public class Monster : MonoBehaviour
     private StateData m_cState;
     [SerializeField] private GameObject m_target;
     public GameObject _target => m_target;
+    NavMeshAgent agent;
     void Start()
     {
         transform.position = new Vector3(10, 10, 0);
         m_target = GameObject.Find("Player");
         
         m_cFSM.ChangeState(m_cState.MoveState);
+        agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
     }
     private IEnumerator OnUpdate()
     {
@@ -54,11 +59,12 @@ public class Monster : MonoBehaviour
     }
     public void MoveToPlayer()
     {
-        Vector2 direction = m_target.transform.position - transform.position;
+        agent.SetDestination(m_target.transform.position);
+        /*Vector2 direction = m_target.transform.position - transform.position;
         direction.Normalize();
 
         float moveSpeed = m_sData.m_iSpeed; // 이동 속도
-        transform.Translate(direction * moveSpeed * Time.deltaTime);
+        transform.Translate(direction * moveSpeed * Time.deltaTime);*/
 
     }
     private void OnTriggerEnter2D(Collider2D collision)
